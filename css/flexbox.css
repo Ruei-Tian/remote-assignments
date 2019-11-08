@@ -1,11 +1,12 @@
-/* ================================= 
-  Base
-==================================== */
+body {
+	display: flex;
+	flex-direction: column;
+}
 
+.button {
+	align-self: center;
+}
 
-/* ================================= 
-  Media Queries
-==================================== */
 
 @media (min-width: 769px) {
 
@@ -28,6 +29,8 @@
 	.col {
 		flex-basis: 49%;
 	}
+
+
 
 
 }

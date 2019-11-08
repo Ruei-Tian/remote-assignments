@@ -80,6 +80,7 @@ img {
 	padding: 3.2em 0;
 	margin-bottom: 48px;
 }
+
 .col  {	
 	border: 2px solid #3acec2;
 	border-radius: 8px;
@@ -113,16 +114,23 @@ img {
 	border-radius: 5px;
 }
 
+.button a {
+	display: block;
+	background-color: #3acec2;
+	color: #fff;
+	padding: 5px 10px;
+}
+
 /* ================================= 
   Media Queries
 ==================================== */
 
-@media (min-width: 769px) {
+@media (min-width: 800px) {
 	.main-header,
 	.row {
 		width: 80%;
 		margin: 0 auto;
-		max-width: 1150px;
+		max-width: 1200px;
 	}
 	.tagline {
 		font-size: 1.4em;
