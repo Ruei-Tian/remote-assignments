@@ -1,0 +1,202 @@
+/* flex */
+
+body {
+    display: flex;
+    flex-direction: column;    
+}
+
+
+.main-header,
+.main-nav,
+.row {
+	display: flex;
+}
+
+.toggleMenu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    width: 210px;
+    align-self: flex-end;
+    transform: translateX(210px);
+    transition: all 0.5s;
+}
+
+.toggleMenu li{
+    padding: 30px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.main-header {
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main-nav-trigger {
+	display: none;
+}
+
+@media (max-width: 800px) {
+    .main-nav {
+        display: none;
+	}
+	.main-nav-trigger {
+		display: block;
+    }
+    
+    .active {
+        transform: translateX(0);
+    }
+}
+ 
+
+.row {
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.col {
+	flex-basis: 48%;
+}
+
+@media (max-width: 500px) {
+    .col {
+		flex-basis: 90%;
+	}	
+}
+
+.button {
+	align-self: center;
+}
+
+/* base */
+*, *::after, *::before {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Varela Round','Microsoft JhengHei UI', sans-serif;
+	line-height: 1.6;
+	color: #3a3a3a;
+	margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p {
+	font-size: .95em;
+	margin-bottom: 1.8em;
+}
+
+h2,
+h3,
+a {
+	color: #9F9100;
+}
+
+h2,
+h3 {
+	margin-top: 0;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+.logo {
+	width: 190px;
+}
+.headline {
+	margin-bottom: 0;
+}
+
+.main-nav {
+	margin-top: 5px;
+}
+
+.main-nav a {
+	text-align: center;
+	display: block;
+	padding: 10px 15px;
+}
+.main-nav a {
+	font-size: .95em;
+	color: #F4DF0F;
+	text-transform: uppercase;
+}
+.main-nav a:hover {
+	color: #9F9100;
+}
+
+.main-nav-trigger a{
+	font-size: 2em;
+}
+
+.main-header {
+	padding: .5em 2em;
+}
+
+.banner {
+	color: #fff;
+	background: #F4DF0F;
+	padding: 3.2em 0;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.banner h1{
+    cursor: pointer;	
+}
+
+.banner h1:hover{
+    text-shadow: 0px 0px 3px;
+}
+
+.content {
+	max-width: 1200px;
+	margin: auto;
+}
+
+
+.col  {	
+	border: 2px solid #F4DF0F;
+	background-color: #FFFA98;	
+	
+	margin-bottom: 30px;
+	padding: .5em 1%;
+
+}
+
+.button {
+    margin-bottom: 30px;
+}
+
+.button a {
+	display: block;
+	background-color: #F4DF0F;
+	color: #fff;
+    padding: 5px 10px;
+    width: 110%;
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
