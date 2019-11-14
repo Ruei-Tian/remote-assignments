@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>week2 assignment1-3</title>
+</head>
+<body>
+    <script>
+//assignment1
+function max(...num) {
+    // your code here, for-loop method preferred
+    let max = num[0];
+    for(let i = 0;i < num.length; i++) {       
+        if(max < num[i]) {
+            max = num[i];  
+        }    
+    } 
+    return max;  
+};
+
+console.log(max(1, 2, 4, 5))
+console.log(max(5, 2, 7, 1, 6));
+console.log(max(5, 2, 7, 10, 6));
+
+// assignment2 
+
+const ob1 = {
+    op: "+",
+    n1: 2,
+    n2: 3
+}
+
+const ob2 = new Object();
+ob2.op = "-";
+ob2.n1 = 4;
+ob2.n2 = 1;
+
+function calculate(args){
+    let result;
+    if(args.op === "+"){
+        result = args.n1 + args.n2;
+    } else if (args.op === "-"){
+        result = args.n1 - args.n2;
+    } else {
+        result = "Not supported";
+    } 
+    return result;
+}
+
+console.log(calculate(ob1));
+console.log(calculate(ob2));
+console.log(calculate({op:"/",n1:9,n2:3}));
+
+
+
+// assignment3
+function avg(data){
+    // your code here
+
+    const individualPrice = data.products.map(product => product.price);
+    console.log(individualPrice);
+    const totalPrice = individualPrice.reduce((a,b) => a+b,0);
+    console.log(totalPrice);
+    return Math.round(totalPrice / data.size);
+}
+
+console.log(avg({
+    size:3,
+    products:[
+        {
+            name:"Product 1",
+            price:100
+        },
+        {
+            name:"Product 2",
+            price:700
+        },
+        {
+            name:"Product 3",
+            price:250
+        }
+    ]
+}));  
+
+// assignment 5
+function twoSum(nums, target){
+    // your code here
+    let numbers = [];
+    let num1;
+    let num2;
+    for(let i = 0; i < nums.length; i++) {
+        num1 = nums[i];
+        num2 = target - num1;
+        if(numbers.indexOf(num2) !== -1) {
+            return [numbers.indexOf(num2), i];
+        } else {
+            numbers[i] = num1;
+        }
+    }
+}
+
+// function twoSum(nums, target) {
+//     let num1;
+//     let num2;
+//     for(let i = 0; i < nums.length; i++) {
+//         num1 = nums[i];
+//         for(let j = 0; j < nums.length; j++) {
+//             num2 = nums[j];
+//             if(num1 + num2 == target) {
+//             return [i, j]
+//         }
+//         }
+//     }
+// }
+
+console.log(twoSum([2, 7, 11, 15], 9));
+console.log(twoSum([1, 5, 11, 8], 12));
+
+    </script>
+</body>
+</html> 
