@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Week-3 Assignment Backend API by AJAX</title>
+</head>
+<body>
+   
+    <form>
+        <label for="num">加加看</label>
+        <input type="text" name="num" id="num">
+        <button type="submit" class="btn">提交</button>
+    </form>
+    
+    <section>
+        <p>答案是: <span class="answer"></span></p>
+    </section>
+
+<script>   
+    const btn = document.querySelector('.btn');
+    const num = document.querySelector('#num');
+    
+    btn.addEventListener('click', (val) => {
+        val.preventDefault();
+        const xhr = new XMLHttpRequest();
+        val = num.value;
+        xhr.open('get', 'http://localhost:3000/getData?num=' + val, true);
+        xhr.onload = function() {
+            console.log(this.responseText);
+            const answer = document.querySelector('.answer');
+            answer.innerHTML = this.responseText;          
+        };
+        xhr.send();       
+    })   
+
+</script>
+</body>
+</html>
