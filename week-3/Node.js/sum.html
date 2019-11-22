@@ -9,8 +9,8 @@
 <body>
    
     <form>
-        <label for="num">加加看</label>
-        <input type="text" name="num" id="num">
+        <label for="number">加加看</label>
+        <input type="text" name="number" id="number">
         <button type="submit" class="btn">提交</button>
     </form>
     
@@ -20,13 +20,13 @@
 
 <script>   
     const btn = document.querySelector('.btn');
-    const num = document.querySelector('#num');
+    const number = document.querySelector('#number');
     
     btn.addEventListener('click', (val) => {
         val.preventDefault();
         const xhr = new XMLHttpRequest();
-        val = num.value;
-        xhr.open('get', 'http://localhost:3000/getData?num=' + val, true);
+        val = number.value;
+        xhr.open('get', 'http://localhost:3000/getData?number=' + val, true);
         xhr.onload = function() {
             console.log(this.responseText);
             const answer = document.querySelector('.answer');

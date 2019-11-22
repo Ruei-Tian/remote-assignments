@@ -19,10 +19,10 @@ app.get("/sum.html", function(req, res){
 })
 
 app.get("/getData", (req, res) => {
-    let input = req.query.num;
+    let input = req.query.number;
     let result;
     if(input == "") {
-        result = 'Lack of Paramete';
+        result = 'Lack of Parameter';
     } else if(isNaN(input)) {
         result = 'Wrong Parameter';
     } else {
