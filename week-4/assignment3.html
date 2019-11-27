@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React assignment</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://kit.fontawesome.com/475903e002.js" crossorigin="anonymous"></script>
+    <script type="text/babel">
+      let data = [
+            {id:'1',title:'item1',name:'content box1',description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit inventore quod totam maiores esse, omnis nostrum suscipit? Cum porro veritatis, voluptatum voluptate ullam pariatur, voluptas itaque delectus, inventore cupiditate fuga!'},
+            {id:'2',title:'item2',name:'content box2',description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit inventore quod totam maiores esse, omnis nostrum suscipit? Cum porro veritatis, voluptatum voluptate ullam pariatur, voluptas itaque delectus, inventore cupiditate fuga!'},
+            {id:'3',title:'item3',name:'content box3',description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit inventore quod totam maiores esse, omnis nostrum suscipit? Cum porro veritatis, voluptatum voluptate ullam pariatur, voluptas itaque delectus, inventore cupiditate fuga!'},
+            {id:'4',title:'item4',name:'content box4',description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit inventore quod totam maiores esse, omnis nostrum suscipit? Cum porro veritatis, voluptatum voluptate ullam pariatur, voluptas itaque delectus, inventore cupiditate fuga!'}
+            ];
+      let hide = ' hide';
+      
+      class MyWeb extends React.Component{
+        render() {
+          return <div className="wrap">        
+            <Header itemData={this.props.itemData}/>
+            <Banner/>
+            <Content itemData={this.props.itemData}/>
+            <Button/>
+            <Content itemData={this.props.itemData} hideClass={this.props.passClass}/>
+            </div>
+            
+        }
+      }
+
+      class HeaderList extends React.Component{
+        render() {
+          return  <li><a href="#">{this.props.title}</a></li>
+        }
+      }
+
+      class TogleHideMenu extends React.Component{
+        constructor(props){
+          super(props);
+
+        }
+
+        hideMenu(e){
+          let toggleMenu = document.querySelector('.toggleMenu');
+          toggleMenu.classList.remove('active');
+        }
+
+        render() {
+          return <ul className={this.props.className}>
+                    <div className="close"
+                    onClick={this.hideMenu.bind(this)}><i className="fas fa-window-close"></i></div>
+                    {this.props.itemData}
+                </ul>
+        }
+      }
+
+      class Header extends React.Component{
+        constructor(props){
+          super(props);
+          this.state={className:'toggleMenu'};
+        }
+
+        showMenu(e){
+          this.setState((currentState, cerrentProps) => {
+            return {className: currentState.className + " active"};
+          });
+        }
+
+        render() {         
+          let itemList = this.props.itemData.map((item) => {
+            return <HeaderList  key={item.id} title={item.title} />
+          });
+           return <div className="main-header">   
+              <TogleHideMenu itemData={itemList} className={this.state.className}/>         
+                <h1 className="logo"><a href="#">Let's Learn</a></h1>
+                <div className="main-nav-trigger"
+                onClick={this.showMenu.bind(this)}>
+                    <a href="#"><i className="fas fa-bars"></i></a>
+                </div>  
+                <ul className="main-nav">                 
+                 {itemList}
+                </ul>
+          </div>
+        }
+      }
+
+      class Banner extends React.Component{
+        constructor(props) {
+          super(props);
+          this.state={headline: 'Welcome Message'}
+        }
+
+        changeHeadline(e) {
+          if(this.state.headline.includes('Welcome')) {
+            this.setState({headline: 'Have A Good Time!'})
+          } else {
+            this.setState({headline: 'Welcome!'})
+          }
+        }
+
+        render() {
+          return <div className="banner"> 
+            <h1 className="headline"
+            onClick={this.changeHeadline.bind(this)}>{this.state.headline}</h1>
+              </div>
+        }
+      }
+
+      class Col extends React.Component{
+        render() {
+          return <div className="col">
+                <h3>{this.props.name}</h3>
+                <p>{this.props.description}</p>
+            </div>
+            
+        }
+      }
+
+      class Content extends React.Component{
+        constructor(props){
+          super(props);
+        }
+
+        render() {
+          let itemDetail = this.props.itemData.map((item) =>
+          <Col key={item.id} name={item.name} description={item.description} />)
+          return <div className={"content"+this.props.hideClass}>
+            <h2>Section Title</h2>
+            <div className="row">
+            {itemDetail}
+          </div>
+            </div>
+        }
+      }
+
+      class Button extends React.Component{
+        showHideContent(e){
+          e.preventDefault();
+          let hideContent = document.querySelector('.hide');
+          hideContent.style.display = 'block';
+        
+        }
+        render() {
+          return <div className="button">
+                    <a href="#"
+                    onClick={this.showHideContent.bind(this)}>call to action</a>
+                </div>
+  
+        }
+      }
+
+    window.addEventListener('load', () => {
+        ReactDOM.render(<MyWeb itemData={data} passClass={hide}/>, document.getElementById('root'));
+      })
+
+    </script>
+  </body>
+</html>

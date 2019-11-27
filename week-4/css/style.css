@@ -16,10 +16,10 @@
 .toggleMenu {
     position: fixed;
     top: 0;
-    bottom: 0;
+	bottom: 0;
+	right: 0;
     background-color: #fff;
     width: 210px;
-    align-self: flex-end;
     transform: translateX(210px);
     transition: all 0.5s;
 }
