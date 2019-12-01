@@ -3,7 +3,6 @@
 .wrap {
     display: flex;
 	flex-direction: column;    
-
 }
 
 
@@ -21,7 +20,7 @@
     background-color: #fff;
     width: 210px;
     transform: translateX(210px);
-    transition: all 0.5s;
+	/* visibility: hidden; */
 }
 
 .toggleMenu li{
@@ -74,9 +73,6 @@
 	}	
 }
 
-.button {
-	align-self: center;
-}
 
 /* base */
 *, *::after, *::before {
@@ -179,14 +175,14 @@ img {
 .col  {	
 	border: 2px solid #F4DF0F;
 	background-color: #FFFA98;	
-	
 	margin-bottom: 30px;
 	padding: .5em 1%;
 
 }
 
 .button {
-    margin-bottom: 30px;
+	margin: 0 auto 30px auto;
+	width: 120px;	
 }
 
 .button a {
@@ -194,7 +190,6 @@ img {
 	background-color: #F4DF0F;
 	color: #fff;
     padding: 5px 10px;
-    width: 110%;
     text-align: center;
 }
 

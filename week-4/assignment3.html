@@ -20,74 +20,78 @@
             {id:'3',title:'item3',name:'content box3',description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit inventore quod totam maiores esse, omnis nostrum suscipit? Cum porro veritatis, voluptatum voluptate ullam pariatur, voluptas itaque delectus, inventore cupiditate fuga!'},
             {id:'4',title:'item4',name:'content box4',description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit inventore quod totam maiores esse, omnis nostrum suscipit? Cum porro veritatis, voluptatum voluptate ullam pariatur, voluptas itaque delectus, inventore cupiditate fuga!'}
             ];
-      let hide = ' hide';
+ 
       
-      class MyWeb extends React.Component{
-        render() {
-          return <div className="wrap">        
-            <Header itemData={this.props.itemData}/>
-            <Banner/>
-            <Content itemData={this.props.itemData}/>
-            <Button/>
-            <Content itemData={this.props.itemData} hideClass={this.props.passClass}/>
-            </div>
-            
-        }
-      }
+    
 
       class HeaderList extends React.Component{
         render() {
-          return  <li><a href="#">{this.props.title}</a></li>
+          return  (<li><a href="#">{this.props.title}</a></li>)
         }
       }
 
       class TogleHideMenu extends React.Component{
         constructor(props){
           super(props);
-
+          this.state={
+            className: 'toggleMenu active'
+            }
         }
-
-        hideMenu(e){
-          let toggleMenu = document.querySelector('.toggleMenu');
-          toggleMenu.classList.remove('active');
+        
+        hideMenu(e){ 
+          let hide = false;
+          this.props.showMenu(hide);
+          this.setState((currentState, cerrentProps) => {
+            return {
+              className: 'toggleMenu'
+            };
+          });
         }
 
         render() {
-          return <ul className={this.props.className}>
-                    <div className="close"
-                    onClick={this.hideMenu.bind(this)}><i className="fas fa-window-close"></i></div>
-                    {this.props.itemData}
-                </ul>
+          return (<ul className={this.state.className}> 
+                      <div className="close"
+                      onClick={this.hideMenu.bind(this)}><i className="fas fa-window-close"></i></div>
+                      {this.props.itemList}
+                    </ul>     
+                )
         }
       }
 
       class Header extends React.Component{
         constructor(props){
           super(props);
-          this.state={className:'toggleMenu'};
+          this.state={
+            hide: false
+            };
         }
 
-        showMenu(e){
-          this.setState((currentState, cerrentProps) => {
-            return {className: currentState.className + " active"};
-          });
-        }
+        showMenu(hide){
+          if(!this.state.hide){
+            this.setState({hide: true});
+          } else {
+            this.setState({hide: hide});
+          }
+          }
+        
 
         render() {         
           let itemList = this.props.itemData.map((item) => {
             return <HeaderList  key={item.id} title={item.title} />
           });
-           return <div className="main-header">   
-              <TogleHideMenu itemData={itemList} className={this.state.className}/>         
-                <h1 className="logo"><a href="#">Let's Learn</a></h1>
-                <div className="main-nav-trigger"
-                onClick={this.showMenu.bind(this)}>
-                    <a href="#"><i className="fas fa-bars"></i></a>
-                </div>  
-                <ul className="main-nav">                 
-                 {itemList}
-                </ul>
-          </div>
+           return <div className="main-header">  
+                 { this.state.hide === true ? 
+                    <TogleHideMenu itemList={itemList} showMenu={(hide) => this.showMenu(hide)}/> : null
+                 }                                 
+                    <h1 className="logo"><a href="#">Let's Learn</a></h1>
+                     <div className="main-nav-trigger"
+                      onClick={this.showMenu.bind(this)}>
+                          <a href="#"><i className="fas fa-bars"></i></a>
+                    </div>  
+                    <ul className="main-nav">                 
+                         {itemList}
+                    </ul>
+                  </div>
         }
       }
 
@@ -106,19 +110,19 @@
         }
 
         render() {
-          return <div className="banner"> 
-            <h1 className="headline"
-            onClick={this.changeHeadline.bind(this)}>{this.state.headline}</h1>
-              </div>
+          return (<div className="banner"> 
+                  <h1 className="headline"
+                  onClick={this.changeHeadline.bind(this)}>{this.state.headline}</h1>
+                 </div>)
         }
       }
 
       class Col extends React.Component{
         render() {
-          return <div className="col">
-                <h3>{this.props.name}</h3>
-                <p>{this.props.description}</p>
-            </div>
+          return (<div className="col">
+                    <h3>{this.props.name}</h3>
+                    <p>{this.props.description}</p>
+                </div>)
             
         }
       }
@@ -126,38 +130,70 @@
       class Content extends React.Component{
         constructor(props){
           super(props);
+          this.state={
+            style: this.props.style
+          }
         }
 
         render() {
           let itemDetail = this.props.itemData.map((item) =>
           <Col key={item.id} name={item.name} description={item.description} />)
-          return <div className={"content"+this.props.hideClass}>
-            <h2>Section Title</h2>
-            <div className="row">
-            {itemDetail}
-          </div>
-            </div>
+          return (<div className="content">
+                  <h2>Section Title</h2>
+                  <div className="row">
+                    {itemDetail}
+                  </div>
+                </div>)
         }
       }
 
       class Button extends React.Component{
+        constructor(props){
+          super(props);
+          this.state={
+            show: false
+          }
+        }
         showHideContent(e){
           e.preventDefault();
-          let hideContent = document.querySelector('.hide');
-          hideContent.style.display = 'block';
+          if(!this.state.show) { 
+            this.setState({
+            show: true
+          });
+          } else {
+            this.setState({
+            show: false
+          });
+          }
         
         }
         render() {
-          return <div className="button">
+          return (<div>
+                <div className="button">
                     <a href="#"
                     onClick={this.showHideContent.bind(this)}>call to action</a>
                 </div>
-  
+                { this.state.show === true ? 
+                  <Content itemData={this.props.itemData} /> : null
+                }
+                </div>
+          )
+        }
+      }
+
+      class MyWeb extends React.Component{
+            render() {
+          return (<div className="wrap">        
+                  <Header itemData={this.props.itemData}/>
+                  <Banner/>
+                  <Content itemData={this.props.itemData}/>
+                  <Button itemData={this.props.itemData}/>
+                </div>)   
         }
       }
 
     window.addEventListener('load', () => {
-        ReactDOM.render(<MyWeb itemData={data} passClass={hide}/>, document.getElementById('root'));
+        ReactDOM.render(<MyWeb itemData={data} />, document.getElementById('root'));
       })
 
     </script>
